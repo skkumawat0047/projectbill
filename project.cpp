@@ -67,8 +67,4 @@ int main(){
 	Product p;
 	p.input();
 	return 0;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4657f0c997702b0de60e0a858b7bf4197cee8005

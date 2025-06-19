@@ -179,15 +179,16 @@ void viewProducts()
         p.avi_display();
     fin.close();
 }
-// void addproduct()
-// {
-//     Product p;
-//     ofstream fout("product.bin", ios::binary | ios::app);
-//     p.avi_input();
-//     fout.write((char *)&p, sizeof(p));
-//     fout.close();
-//     cout << "product added successfully! " << endl;
-// }
+
+void addproduct()
+{
+    Product p;
+    ofstream fout("product.bin", ios::binary | ios::app);
+    p.avi_input();
+    fout.write((char *)&p, sizeof(p));
+    fout.close();
+    cout << "product added successfully! " << endl;
+}
 class customer
 {
     string name;
@@ -363,7 +364,7 @@ void productmenu()
         switch (choice)
         {
         case 1:
-            Product.avi_input();
+            addproduct();
             break;
         case 2:
             Product.updateproduct();
@@ -372,7 +373,7 @@ void productmenu()
             Product.product_delet();
             break;
         case 4:
-            Product.avi_display();
+            viewProducts();
             break;
         case 5:
             cout << "exiting..." << endl;
@@ -380,7 +381,8 @@ void productmenu()
         default:
             cout << "invalid input, please enter again!" << endl;
         }
-    } while (choice != 5);
+    } 
+    while (choice != 5);
 }
 int main()
 {

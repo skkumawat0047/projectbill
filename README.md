@@ -23,7 +23,6 @@ Inputs  /  Outpus:
 Enter Product ID: 11
 enter name: apple
 enter price: 45.56
-Enter Quantity: 13.80
 product added successfully! 
  1. for add product
  2. for update any product by productid.
@@ -35,7 +34,6 @@ product added successfully!
 Enter Product ID: 12
 enter name: mango
 enter price: 40
-Enter Quantity: 170
 product added successfully!
 
 1. for add product
@@ -44,16 +42,15 @@ product added successfully!
 4. for display products available on the store
 5. exit back...
   ->4
-   ID      Name     Price      Qty
---------------------------------------------------
-   11     apple     45.56      13.8
-   12     mango       40       170
+   ID      Name     Price     
+-------------------------------
+   11     apple     45.56     
+   12     mango       40      
 
    ->2
 Enter Product ID: 13
 enter name: mango
 enter price: 50
-Enter Quantity: 170
 product added successfully! 
 1. for add product
 2. for update any product by productid.
@@ -70,9 +67,9 @@ Product deleted!
 4. for display products available on the store
 5. exit back...
   ->4
-   ID      Name     Price      Qty
---------------------------------------------------
-   13     mango       50       170
+   ID      Name     Price      
+--------------------------------
+   13     mango       50       
 
 1. for add product
 2. for update any product by productid.
@@ -86,6 +83,8 @@ Product deleted!
 2. for printInvoice.
 3. for Exit. 
  -> 2
+enter invoice number: 4512
 enter name: sanjay
-enter mob_number 5632414552  
+enter mob_number: 5632414552  
 Enter Product ID: 12
+

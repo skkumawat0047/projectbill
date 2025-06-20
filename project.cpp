@@ -9,7 +9,7 @@
 using namespace std;
 class Product
 {
-    public:
+public:
     int id;
     string name;
     float price;
@@ -19,7 +19,7 @@ class Product
     void updateproduct();
     void product_delet();
     int getid() { return id; }
-    float getprice() { return price;}
+    float getprice() { return price; }
 };
 
 bool namevalid(const string &name)
@@ -193,17 +193,19 @@ class customer
 {
     string name;
     long long int mob_number;
-    public:
+
+public:
     int c_id;
     string productname;
     float productprice;
     float c_quantity;
 
-    vector<int> items1={};
-    vector<string> items2={};
-    vector<float> items3={};
-    vector<float> items4={};
+    vector<int> items1 = {};
+    vector<string> items2 = {};
+    vector<float> items3 = {};
+    vector<float> items4 = {};
     float total;
+    int z;
     void cust_input1();
     void cust_input2();
     void cust_display();
@@ -248,58 +250,76 @@ void customer ::cust_input1()
             break;
     }
 }
-void customer::cust_input2(){
+void customer::cust_input2()
+{
     Product p;
-    char c;
-    bool found= false;
-    while(true){
-    cout << "Enter Product ID: ";
-    cin >>c_id;
-    if(cin.fail() || c_id<=0){
-    	cout<<"invelid input, plz enter in degits! "<<endl;
-    	cin.clear();
-    	cin.ignore(10000,'\n');}
-    else break;
-	}
-	cin.ignore();
-    ifstream fin("product.bin", ios::binary | ios::in);
-    while(fin.read((char*)&p, sizeof(p))){
-        if(p.getid()==c_id){
-            found=true;
-            cout<<"enter quantities:";
-            cin>>c_quantity;
+    // customer c;
+    char e;
+    z = 1;
+    while (true)
+    {
+        cout << "Enter Product ID: ";
+        cin >> c_id;
+        if (cin.fail() || c_id <= 0)
+        {
+            cout << "invelid input, plz enter in degits! " << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+        else
+            break;
+    }
+    bool found = false;
+    ifstream fin("product.bin", ios::binary | ios::in | ios::app);
+    while (fin.read((char *)&p, sizeof(p)))
+    {
+        if (p.getid() == c_id)
+        {
+            found = true;
+            cout << "enter quantities:";
+            cin >> c_quantity;
+            z++;
+            ofstream cust("customer.txt");
+            cust << c_id << setw(10) << p.price << setw(10) << c_quantity << setw(10) << p.name << endl;
+            cust.close();
             break;
         }
-        float a=p.price;
-        float b= c_quantity;
-        string c=p.name;
-        items2.push_back(c);
-        items3.push_back(b);
-        items4.push_back(a);
-        total= total+ a*b;
+        total=total+ p.price*c_quantity;
         break;
     }
-    if(!found){
-        cout<<"product not found"<<endl;
+    if (!found)
+    {
+        cout << "product not found" << endl;
     }
-    cout<<"add more items(y/n): ";
-    cin>>c;
-    if(c=='y'){
+    cout << "add more items(y/n): ";
+    cin >> e;
+    if (e == 'y')
+    {
         cust_input2();
     }
-    else return;
-    
+    else if (e == 'n')
+    {
+        return;
+    }
+    else
+        {cout << "invalid input!" << endl;
+            cust_input2();
+        }
 }
-
 void customer::cust_display()
 {
-
+    customer c;
     cout << setw(10) << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
-    for(size_t i; i<items1.size(); i++){
-        cout<<items1[i]<<setw(10)<<items2[i]<<setw(10)<<items3[i]<<setw(10)<<items4[i]<<endl;
+    ifstream cin("customer.txt");
+    for (int i = 1; i <= z; i++)
+    {
+        string s1;
+        getline(cin, s1);
+        cout << s1 << endl;
     }
+    ofstream cust("customer.txt", ios::out | ios::trunc);
+    cust.close();
 }
-
 // void all_customer()
 // {
 //     customer c;
@@ -339,13 +359,13 @@ void Invoice::createInvoice()
 
 void Invoice::printInvoice()
 {
-    customer c;
     Invoice i;
+    customer c;
+    i.createInvoice();
     c.cust_input1();
     c.cust_input2();
-    i.createInvoice();
     cout << "/--------------------Invoice-------------------/" << endl;
-    cout<<"invoice number: "<<i.invoice_number<<endl;
+    cout << "invoice number: " << i.invoice_number << endl;
     c.cust_display();
     cout<<"total amount: "<<c.total;
 }
@@ -381,8 +401,7 @@ void productmenu()
         default:
             cout << "invalid input, please enter again!" << endl;
         }
-    } 
-    while (choice != 5);
+    } while (choice != 5);
 }
 int main()
 {

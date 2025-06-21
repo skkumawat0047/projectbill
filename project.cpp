@@ -144,14 +144,14 @@ class customer
 {
     string name;
     long long int mob_number;
-
 public:
+    float total=0;
     int c_id;
+    int z=1;
     string productname;
     float productprice;
     float c_quantity;
-    float total;
-    int z;
+    // int z;
     void cust_input1();
     void cust_input2();
     void cust_display();
@@ -221,26 +221,25 @@ void customer::cust_input2()
     char e;
     c_id=P_id();
     bool found = false;
-    total=0;
-    z=1;
     ifstream fin("product.bin", ios::binary | ios::in | ios::app);
     ofstream cust("customer.txt", ios::out | ios::app);
+    float total1;
     while (fin.read((char *)&p, sizeof(p)))
     {
         if (p.getid() == c_id)
         {
-            float total1=0;
+            total1=0;
             found = true;
             c_quantity=P_qunt();
             z++;
             cust << c_id << "    " << p.getprice() << "    " << c_quantity << "    " << p.getname() <<"    ";
             total1 =  p.getprice() * c_quantity;
             cust<<total1<<endl;
-            total =total+total1;
         }
         // total = total + p.getprice() * c_quantity;
         break;
     }
+    total =total+total1;
     cust.close();
     fin.close();
     if (!found)
@@ -271,12 +270,13 @@ void customer::cust_display()
     cout << "id" << setw(10) << "price" << setw(5)<<"qt."<< "name" << "\n";
     cout << "------------------------------------------------\n";
     ifstream cin("customer.txt", ios::out | ios::in | ios::app);
-    for (int i =0; i <= z; i++)
+    for (int i =1; i < z; i++)
     {
         string s1;
         getline(cin, s1);
         cout << s1 << endl;
     }
+    cout<<"--------------------------------------------\n";
     cout << "\ntotal amount: " <<total << "\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();

@@ -8,18 +8,14 @@
 using namespace std;
 class Product
 {
+    public:
     int id;
     string name;
     float price;
-
-public:
     void avi_input();
     void avi_display();
     void viewProducts();
     void product_delet();
-    int getid() { return id; }
-    string getname() { return name; }
-    float getprice() { return price; }
 };
 
 bool namevalid(const string &name)
@@ -81,31 +77,31 @@ void Product::avi_input()
         else
             break;
     }
-}
-void Product::avi_display()
-{
-    cout << id << setw(10) << name << setw(10) << price << endl;
+    ofstream fout("product.txt", ios::app);
+    fout << id << "    " << name << "    " << price << endl;
+    fout.close();
+    cout << "product added successfully! " << endl;
 }
 void Product::product_delet()
 {
     Product p;
-    int p_id=P_id();
+    int p_id = P_id();
     bool found = false;
-    ifstream fin("product.bin", ios::binary);
-    ofstream fout("temp.bin", ios::binary);
-    while (fin.read((char *)&p, sizeof(p)))
+    ifstream fin("product.txt", ios::in | ios::app);
+    ofstream fout("temp.txt", ios::out | ios::app);
+    while (fin >> p.id >> p.name >> p.price)
     {
-        if (p.getid() == p_id)
+        if (p.id == p_id)
         {
             found = true;
             continue;
         }
-        fout.write((char *)&p, sizeof(p));
+        fout << p.id << "    " << p.name << "    " << p.price << endl;
     }
     fin.close();
     fout.close();
-    remove("product.bin");
-    rename("temp.bin", "product.bin");
+    remove("product.txt");
+    rename("temp.txt", "product.txt");
     if (found)
     {
         cout << "product deleted successfully!" << endl;
@@ -116,7 +112,7 @@ void Product::product_delet()
 
 void Product::viewProducts()
 {
-    ifstream fin("product.bin", ios::binary);
+    ifstream fin("product.txt", ios::in | ios::app);
     if (!fin)
     {
         cout << " No products found." << endl;
@@ -124,32 +120,27 @@ void Product::viewProducts()
     }
 
     Product p;
-    cout << setw(5) << "ID" << setw(10) << "Name"
+    cout << "ID" << setw(10) << "Name"
          << setw(10) << "Price\n";
     cout << "--------------------------------------------------\n";
-    while (fin.read((char *)&p, sizeof(p)))
-        p.avi_display();
+    string s2;
+    while (getline(fin, s2))
+    {
+        cout << s2 << endl;
+    }
+
     fin.close();
-}
-void addproduct()
-{
-    Product p;
-    ofstream fout("product.bin", ios::binary | ios::app);
-    p.avi_input();
-    fout.write((char *)&p, sizeof(p));
-    fout.close();
-    cout << "product added successfully! " << endl;
+    cout << "\n------------------------------------------------\n";
+    cout << "\n";
 }
 class customer
 {
     string name;
     long long int mob_number;
+
 public:
-    float total=0;
+    float total =0;
     int c_id;
-    int z=1;
-    string productname;
-    float productprice;
     float c_quantity;
     void cust_input1();
     void cust_input2();
@@ -196,7 +187,7 @@ void customer ::cust_input1()
             break;
     }
     ofstream fout("allcustomer.txt", ios::app);
-    fout<<name<<"     "<<mob_number<<"     ";
+    fout << name << "     " << mob_number << "     ";
     fout.close();
 }
 float P_qunt()
@@ -222,26 +213,25 @@ void customer::cust_input2()
 {
     Product p;
     char e;
-    c_id=P_id();
+    c_id = P_id();
     bool found = false;
-    ifstream fin("product.bin", ios::binary | ios::in | ios::app);
+    ifstream fin("product.txt", ios::in);
     ofstream cust("customer.txt", ios::out | ios::app);
     float total1;
-    while (fin.read((char *)&p, sizeof(p)))
+    while (fin >> p.id >> p.name >> p.price)
     {
-        if (p.getid() == c_id)
+        if (p.id==c_id)
         {
-            total1=0;
+            total1 = 0;
             found = true;
-            c_quantity=P_qunt();
-            z++;
-            cust << c_id << "    " << p.getprice() << "    " << c_quantity << "    " << p.getname() <<"    ";
-            total1 =  p.getprice() * c_quantity;
-            cust<<total1<<endl;
+            c_quantity = P_qunt();
+            cust << c_id << "    " << p.price << "    " << c_quantity << "    " << p.name << "    ";
+            total1 = p.price * c_quantity;
+            cust << total1 << endl;
+            total = total + total1;
+            break;
         }
-        break;
     }
-    total =total+total1;
     cust.close();
     fin.close();
     if (!found)
@@ -256,7 +246,7 @@ void customer::cust_input2()
     }
     else if (e == 'n')
     {
-        return ;
+        return;
     }
     else
     {
@@ -269,27 +259,28 @@ void customer::cust_display()
     // customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
     cout << "\n--------------------***-------------------------\n";
-    cout << "id" << setw(8) << "price" << setw(5)<<"qt."<<setw(5)<< "name" <<setw(5)<< "total\n";
+    cout << "id" << setw(8) << "price" << setw(5) << "qt." << setw(6) << "name" << setw(7) << "total\n";
     cout << "------------------------------------------------\n";
     ifstream cin("customer.txt", ios::out | ios::in | ios::app);
-    for (int i =1; i < z; i++)
+
+    string s1;
+    while (getline(cin, s1))
     {
-        string s1;
-        getline(cin, s1);
         cout << s1 << endl;
     }
-    cout<<"--------------------------------------------\n";
-    cout << "\nyours total amount is: " <<total << "\n";
+    cout << "--------------------------------------------\n";
+    cout << "\nyours total amount is: " << total << "\n";
     cout << "\n-------------------------------------------\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();
     ofstream fout("allcustomer.txt", ios::app);
-    fout<<total<<"     "<<endl;
+    fout << total << "     " << endl;
     fout.close();
 }
 class Invoice
 {
     int invoice_number;
+
 public:
     void createInvoice();
     // void customerproducts();
@@ -315,7 +306,7 @@ void Invoice::createInvoice()
     }
     cin.ignore();
     ofstream fout("allcustomer.txt", ios::app);
-    fout<<invoice_number<<"     ";
+    fout << invoice_number << "     ";
     fout.close();
 }
 
@@ -344,7 +335,7 @@ void productmenu()
         switch (choice)
         {
         case 1:
-            addproduct();
+            Product.avi_input();
             break;
         case 2:
             Product.product_delet();

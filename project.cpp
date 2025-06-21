@@ -141,11 +141,14 @@ class customer
 public:
     float total =0;
     int c_id;
+    // float a;
     float c_quantity;
+    float discount=0;
     void cust_input1();
     void cust_input2();
+    float cust_input3();
+    // float tax();
     void cust_display();
-    // void all_customer();
 };
 int digit_mob(long long int mob_number)
 {
@@ -187,7 +190,7 @@ void customer ::cust_input1()
             break;
     }
     ofstream fout("allcustomer.txt", ios::app);
-    fout << name << "     " << mob_number << "     ";
+    fout <<"    name: "<< name << "     Mob:" << mob_number << "     ";
     fout.close();
 }
 float P_qunt()
@@ -217,6 +220,7 @@ void customer::cust_input2()
     bool found = false;
     ifstream fin("product.txt", ios::in);
     ofstream cust("customer.txt", ios::out | ios::app);
+    ofstream fout("allcustomer.txt", ios::out | ios::app);
     float total1;
     while (fin >> p.id >> p.name >> p.price)
     {
@@ -228,10 +232,12 @@ void customer::cust_input2()
             cust << c_id << "    " << p.price << "    " << c_quantity << "    " << p.name << "    ";
             total1 = p.price * c_quantity;
             cust << total1 << endl;
+            fout<<"    P.id & qunt: "<<c_id<<","<<c_quantity;
             total = total + total1;
             break;
         }
     }
+    fout.close();
     cust.close();
     fin.close();
     if (!found)
@@ -254,9 +260,37 @@ void customer::cust_input2()
         cust_input2();
     }
 }
+float customer::cust_input3(){
+    char c;
+    cout<<"is discount available(y/n): ";
+    cin>>c;
+    if(c=='y'){
+    while (true)
+    {
+        cout << "Enter discount: ";
+        cin >> discount;
+        if (cin.fail() || discount < 0 || discount > 100)
+        {
+            cout << "invelid input, plz enter again! " << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+        else
+            break;
+    }
+   }
+    else if(c=='n'){
+        return 0;
+    }
+    else { 
+        cout<<"invalid input\n ";
+    }
+    return discount;
+}
 void customer::cust_display()
 {
-    // customer c;
+    float a=discount;
+    customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
     cout << "\n--------------------***-------------------------\n";
     cout << "id" << setw(8) << "price" << setw(5) << "qt." << setw(6) << "name" << setw(7) << "total\n";
@@ -270,11 +304,15 @@ void customer::cust_display()
     }
     cout << "--------------------------------------------\n";
     cout << "\nyours total amount is: " << total << "\n";
+    cout<<"discount: " <<a<<"\n";
+    cout<<"tax: 5% \n";
+    cout<<"tax amount is: "<<(total*5)/100<<"\n";
+    cout<<"your final amount is: "<<total*((105-a)/100)<<"\n";
     cout << "\n-------------------------------------------\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();
-    ofstream fout("allcustomer.txt", ios::app);
-    fout << total << "     " << endl;
+    ofstream fout("allcustomer.txt",ios::out | ios::app);
+    fout <<"  dis: "<<a<<"    tax: 5%" << "     total:"<<total << endl;
     fout.close();
 }
 class Invoice
@@ -306,7 +344,7 @@ void Invoice::createInvoice()
     }
     cin.ignore();
     ofstream fout("allcustomer.txt", ios::app);
-    fout << invoice_number << "     ";
+    fout <<"Bill.no: "<< invoice_number;
     fout.close();
 }
 
@@ -317,6 +355,8 @@ void Invoice::printInvoice()
     i.createInvoice();
     c.cust_input1();
     c.cust_input2();
+    c.cust_input3();
+    // float a=discount();
     cout << "\n/--------------------Invoice-------------------/" << endl;
     cout << "invoice number: " << i.invoice_number << endl;
     c.cust_display();

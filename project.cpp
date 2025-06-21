@@ -5,7 +5,6 @@
 #include <cctype>
 #include <limits>
 #include <ctime>
-#include <vector>
 using namespace std;
 class Product
 {
@@ -17,7 +16,6 @@ public:
     void avi_input();
     void avi_display();
     void viewProducts();
-    void updateproduct();
     void product_delet();
     int getid() { return id; }
     string getname() { return name; }
@@ -88,37 +86,6 @@ void Product::avi_display()
 {
     cout << id << setw(10) << name << setw(10) << price << endl;
 }
-
-void Product::updateproduct()
-{
-    Product p;
-    int P_id;
-    cout << "enter id to update product: " << endl;
-    cin >> P_id;
-    fstream file("product.bin", ios::binary | ios::in | ios::out);
-    bool found = false;
-    while (file.read((char *)&p, sizeof(p)))
-    {
-        if (p.getid() == P_id)
-        {
-            file.seekp(-sizeof(p), ios::cur);
-            p.avi_input();
-            file.write((char *)&p, sizeof(p));
-            found = true;
-            break;
-        }
-    }
-    if (found)
-    {
-        cout << "product updated succesfuly" << endl;
-    }
-    else
-    {
-        cout << "id not found!" << endl;
-    }
-    file.close();
-}
-
 void Product::product_delet()
 {
     Product p;
@@ -166,7 +133,6 @@ void Product::viewProducts()
         p.avi_display();
     fin.close();
 }
-
 void addproduct()
 {
     Product p;
@@ -362,10 +328,10 @@ void productmenu()
     do
     {
         cout << "1. for add product " << endl;
-        cout << "2. for update any product by productid." << endl;
-        cout << "3. for delet any product using Productid" << endl;
-        cout << "4. for display products available on the store" << endl;
-        cout << "5. exit back..." << endl;
+        // cout << "2. for update any product by productid." << endl;
+        cout << "2. for delet any product using Productid" << endl;
+        cout << "3. for display products available on the store" << endl;
+        cout << "4. exit back..." << endl;
         cin >> choice;
         switch (choice)
         {
@@ -373,21 +339,18 @@ void productmenu()
             addproduct();
             break;
         case 2:
-            Product.updateproduct();
-            break;
-        case 3:
             Product.product_delet();
             break;
-        case 4:
+        case 3:
             Product.viewProducts();
             break;
-        case 5:
+        case 4:
             cout << "exiting..." << endl;
             break;
         default:
             cout << "invalid input, please enter again!" << endl;
         }
-    } while (choice != 5);
+    } while (choice != 4);
 }
 int main()
 {

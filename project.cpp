@@ -151,11 +151,10 @@ public:
     string productname;
     float productprice;
     float c_quantity;
-    // int z;
     void cust_input1();
     void cust_input2();
     void cust_display();
-    void printcustomer();
+    // void all_customer();
 };
 int digit_mob(long long int mob_number)
 {
@@ -172,6 +171,7 @@ int digit_mob(long long int mob_number)
 }
 void customer ::cust_input1()
 {
+    customer c;
     name;
     mob_number;
     while (true)
@@ -195,6 +195,9 @@ void customer ::cust_input1()
         else
             break;
     }
+    ofstream fout("allcustomer.txt", ios::app);
+    fout<<name<<"     "<<mob_number<<"     ";
+    fout.close();
 }
 float P_qunt()
 {
@@ -236,7 +239,6 @@ void customer::cust_input2()
             total1 =  p.getprice() * c_quantity;
             cust<<total1<<endl;
         }
-        // total = total + p.getprice() * c_quantity;
         break;
     }
     total =total+total1;
@@ -267,7 +269,7 @@ void customer::cust_display()
     // customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
     cout << "\n--------------------***-------------------------\n";
-    cout << "id" << setw(10) << "price" << setw(5)<<"qt."<< "name" << "\n";
+    cout << "id" << setw(8) << "price" << setw(5)<<"qt."<<setw(5)<< "name" <<setw(5)<< "total\n";
     cout << "------------------------------------------------\n";
     ifstream cin("customer.txt", ios::out | ios::in | ios::app);
     for (int i =1; i < z; i++)
@@ -277,27 +279,21 @@ void customer::cust_display()
         cout << s1 << endl;
     }
     cout<<"--------------------------------------------\n";
-    cout << "\ntotal amount: " <<total << "\n";
+    cout << "\nyours total amount is: " <<total << "\n";
+    cout << "\n-------------------------------------------\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();
-
+    ofstream fout("allcustomer.txt", ios::app);
+    fout<<total<<"     "<<endl;
+    fout.close();
 }
-// void all_customer()
-// {
-//     customer c;
-//     ofstream fout("customer.bin", ios::binary | ios::app);
-//     c.cust_input1();
-//     fout.write((char *)&c, sizeof(c));
-//     fout.close();
-// }
 class Invoice
 {
     int invoice_number;
-    // int discout;
 public:
     void createInvoice();
-    void customerproducts();
-    void saveInvoice();
+    // void customerproducts();
+    // void saveInvoice();
     void printInvoice();
 };
 
@@ -318,6 +314,9 @@ void Invoice::createInvoice()
             break;
     }
     cin.ignore();
+    ofstream fout("allcustomer.txt", ios::app);
+    fout<<invoice_number<<"     ";
+    fout.close();
 }
 
 void Invoice::printInvoice()
@@ -338,7 +337,6 @@ void productmenu()
     do
     {
         cout << "1. for add product " << endl;
-        // cout << "2. for update any product by productid." << endl;
         cout << "2. for delet any product using Productid" << endl;
         cout << "3. for display products available on the store" << endl;
         cout << "4. exit back..." << endl;

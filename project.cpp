@@ -89,10 +89,8 @@ void Product::avi_display()
 void Product::product_delet()
 {
     Product p;
-    int p_id;
+    int p_id=P_id();
     bool found = false;
-    cout << "enter product id: ";
-    cin >> p_id;
     ifstream fin("product.bin", ios::binary);
     ofstream fout("temp.bin", ios::binary);
     while (fin.read((char *)&p, sizeof(p)))
@@ -198,16 +196,14 @@ void customer ::cust_input1()
             break;
     }
 }
-void customer::cust_input2()
+float P_qunt()
 {
-    Product p;
-    char e;
-    z = 1;
+    float quant;
     while (true)
     {
-        cout << "Enter Product ID: ";
-        cin >> c_id;
-        if (cin.fail() || c_id <= 0)
+        cout << "Enter Product quantity: ";
+        cin >> quant;
+        if (cin.fail() || quant <= 0)
         {
             cout << "invelid input, plz enter in degits! " << endl;
             cin.clear();
@@ -216,24 +212,37 @@ void customer::cust_input2()
         else
             break;
     }
+    cin.ignore();
+    return quant;
+}
+void customer::cust_input2()
+{
+    Product p;
+    char e;
+    c_id=P_id();
     bool found = false;
+    total=0;
+    z=1;
     ifstream fin("product.bin", ios::binary | ios::in | ios::app);
+    ofstream cust("customer.txt", ios::out | ios::app);
     while (fin.read((char *)&p, sizeof(p)))
     {
         if (p.getid() == c_id)
         {
+            float total1=0;
             found = true;
-            cout << "enter quantities:";
-            cin >> c_quantity;
+            c_quantity=P_qunt();
             z++;
-            ofstream cust("customer.txt");
-            cust << c_id << "    " << p.getprice() << "    " << c_quantity << "    " << p.getname() << endl;
-            cust.close();
-            break;
+            cust << c_id << "    " << p.getprice() << "    " << c_quantity << "    " << p.getname() <<"    ";
+            total1 =  p.getprice() * c_quantity;
+            cust<<total1<<endl;
+            total =total+total1;
         }
-        total = total + p.getprice() * c_quantity;
+        // total = total + p.getprice() * c_quantity;
         break;
     }
+    cust.close();
+    fin.close();
     if (!found)
     {
         cout << "product not found" << endl;
@@ -246,7 +255,7 @@ void customer::cust_input2()
     }
     else if (e == 'n')
     {
-        return;
+        return ;
     }
     else
     {
@@ -256,20 +265,22 @@ void customer::cust_input2()
 }
 void customer::cust_display()
 {
-    customer c;
+    // customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
     cout << "\n--------------------***-------------------------\n";
     cout << "id" << setw(10) << "price" << setw(5)<<"qt."<< "name" << "\n";
     cout << "------------------------------------------------\n";
-    ifstream cin("customer.txt", ios::out | ios::in);
-    for (int i = 1; i <= z; i++)
+    ifstream cin("customer.txt", ios::out | ios::in | ios::app);
+    for (int i =0; i <= z; i++)
     {
         string s1;
         getline(cin, s1);
         cout << s1 << endl;
     }
+    cout << "\ntotal amount: " <<total << "\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();
+
 }
 // void all_customer()
 // {
@@ -319,7 +330,6 @@ void Invoice::printInvoice()
     cout << "\n/--------------------Invoice-------------------/" << endl;
     cout << "invoice number: " << i.invoice_number << endl;
     c.cust_display();
-    cout << "\ntotal amount: " << c.total << "\n";
 }
 void productmenu()
 {

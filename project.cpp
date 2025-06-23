@@ -174,12 +174,19 @@ public:
 int digit_mob(long long int mob_number)
 {
     int i = 0;
-    while (mob_number > 0)
+    int k=0;
+    while (mob_number >0 )
     {
         mob_number = mob_number / 10;
         i++;
     }
-    if (i == 10)
+    for(int j=0; j<10; j++){
+        mob_number=mob_number/10;
+        k++;
+    }
+    if (k == 9)
+        return 10;
+    else if(i==10)
         return 10;
     else
         return 11;
@@ -250,7 +257,7 @@ void customer::cust_input2()
             total1 = 0;
             found = true;
             c_quantity = P_qunt();
-            cust << c_id << "    " << p.price << "    " << c_quantity << "    " << p.name << "    ";
+            cust << c_id << "    " << p.price << "    " << c_quantity <<setprecision(3)<<"    " << p.name << "    ";
             total1 = p.price * c_quantity;
             cust << total1 << endl;
             fout << "    P.id & qunt: " << c_id << "," << c_quantity;
@@ -318,7 +325,7 @@ void customer::cust_display()
     customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << mob_number << endl;
     cout << "\n--------------------***-------------------------\n";
-    cout << "id" << setw(8) << "price" << setw(5) << "qt." << setw(6) << "name" << setw(7) << "total\n";
+    cout << "id" << "    price" << "   " << "qt.    "<< "name     "  << "   total\n";
     cout << "------------------------------------------------\n";
     ifstream cin("customer.txt", ios::out | ios::in | ios::app);
     string s1;
@@ -326,13 +333,14 @@ void customer::cust_display()
     {
         cout << s1 << endl;
     }
-    cout << "--------------------------------------------\n";
+    cout << "------------------------------------------------";
     cout << "\nyours total amount is: " << total << "\n";
     cout << "discount: " << a << "%\n";
     cout << "tax: 5% \n";
     cout << "tax amount is: " << (total * 5) / 100 << "\n";
+    cout<<"------------------------------------------------\n";
     cout << "your final amount is: " << total * ((105 - a) / 100) << "\n";
-    cout << "\n-------------------------------------------\n";
+    cout << "*----------------------------------------------*\n";
     ofstream cust("customer.txt", ios::out | ios::trunc);
     cust.close();
     ofstream fout("allcustomer.txt", ios::out | ios::app);
@@ -382,7 +390,9 @@ void Invoice::printInvoice()
     c.cust_input1();
     c.cust_input2();
     c.cust_input3();
-    cout << "\n/---------------------Invoice---------------------/" << endl;
+    cout<<"\n------------------   Welcome   -----------------\n";
+    cout<<"\n            ** Radhe-Radhe Grocery shop **          \n";
+    cout << "\n/--------------------Invoice--------------------/" << endl;
     cout << "invoice number: " << i.invoice_number << "        T & D: "<<td<<endl;
     c.cust_display();
 }
@@ -395,7 +405,6 @@ void productmenu()
         cout << "1. for add product " << endl;
         cout << "2. for delet any product using Productid" << endl;
         cout << "3. for display products available on the store" << endl;
-        // cout << "4. for update any product by id" << endl;
         cout << "4. exit back..." << endl;
         cin >> choice;
         switch (choice)
@@ -409,9 +418,6 @@ void productmenu()
         case 3:
             Product.viewProducts();
             break;
-        // case 4:
-        // Product.product_update();
-        // break;
         case 4:
             cout << "exiting..." << endl;
             break;

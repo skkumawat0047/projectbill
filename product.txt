@@ -1,0 +1,9 @@
+11    apple    45
+13    mango    45
+14    grapse    45
+12    mango    12
+15    orange    45
+16    bansna    45
+17    mango    30
+18    mangoshake    45
+19    sakjd    45

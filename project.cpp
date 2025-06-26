@@ -16,7 +16,6 @@ public:
     void avi_display();
     void viewProducts();
     void product_delet();
-    // void product_update();
 };
 int P_id()
 {
@@ -348,6 +347,7 @@ float customer::cust_input3()
     else
     {
         cout << "invalid input\n ";
+        cust_input3();
     }
     return discount;
 }

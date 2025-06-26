@@ -16,6 +16,7 @@ public:
     void avi_display();
     void viewProducts();
     void product_delet();
+    // void product_update();
 };
 int P_id()
 {
@@ -146,7 +147,7 @@ void Product::avi_input()
 
     price=P_qunt("price(in Rs.)");
     ofstream fout("product.txt", ios::app);
-    fout<<left <<setw(5)<< id<<setw(15)<< name << setw(10) << price << endl;
+    fout<<left <<setw(5)<< id<<setw(15)<< name << setw(10)<<fixed<<setprecision(2) << price << endl;
     fout.close();
     cout << "product added successfully! " << endl;
 }
@@ -258,10 +259,29 @@ void customer ::cust_input1()
     fout<<left << setw(15) << name << setw(15) << number;
     fout.close();
 }
+// void custproduct(){
+//     customer c;
+//     char e;
+//     cout << "add more items(y/n): ";
+//     cin >> e;
+//     if (e == 'y')
+//     {
+//         c.cust_input2();
+//     }
+//     else if (e == 'n')
+//     {
+//         return;
+//     }
+//     else
+//     {
+//         cout << "invalid input!" << endl;
+//         cin.ignore(100, '\n');
+//         custproduct();
+//     }
+// }
 void customer::cust_input2()
 {
     Product p;
-    char e;
     c_id = P_id();
     bool found = false;
     ifstream fin("product.txt", ios::in);
@@ -275,11 +295,11 @@ void customer::cust_input2()
             total1 = 0;
             found = true;
             c_quantity = P_qunt("quantity (in KG.):");
-            cust <<left<<setw(5)<<c_id <<setw(10) << p.price << setw(10)<<fixed<< setprecision(3)<< c_quantity << "    " << p.name << "    ";
+            cust <<left<<setw(5)<<c_id <<setw(10) << p.price << setw(10)<< c_quantity <<"    " << p.name << "    ";
             total1 = p.price * c_quantity;
             cust << total1 << endl;
-            fout <<left<<"    P.id & qunt: "<<setw(12) << c_id << "," << c_quantity;
             total = total + total1;
+            fout <<left<<"    P.id & qunt: "<<setw(12) << c_id << "," << c_quantity;
             break;
         }
     }
@@ -290,6 +310,7 @@ void customer::cust_input2()
     {
         cout << "product not found" << endl;
     }
+    char e;
     cout << "add more items(y/n): ";
     cin >> e;
     if (e == 'y')
@@ -302,7 +323,8 @@ void customer::cust_input2()
     }
     else
     {
-        cout << "invalid input!" << endl;
+        cout << "invalid input, I think you want to add product! " << endl;
+        cin.ignore(100, '\n');
         cust_input2();
     }
 }
@@ -344,7 +366,7 @@ void customer::cust_display()
     customer c;
     cout << "name: " << name << setw(20) << "mob_number: " << number << endl;
     cout << "\n--------------------***-------------------------\n";
-    cout << "id" << "    price" << "   " << "qt.    " << "name     " << "   total\n";
+    cout << "id" << "  price" << "       " << "qt.         " << "    name     " << "   total\n";
     cout << "------------------------------------------------\n";
     ifstream cin("customer.txt", ios::out | ios::in | ios::app);
     string s1;
@@ -356,7 +378,7 @@ void customer::cust_display()
     cout << "\nyours total amount is: " << total << "\n";
     cout << "discount: " << a << "%\n";
     cout << "tax: 5% \n";
-    cout << "tax amount is: " << (total * 5) / 100 << "\n";
+    cout << "tax amount is: "<<fixed<<setprecision(2) << (total * 5) / 100 << "\n";
     cout << "------------------------------------------------\n";
     cout << "your final amount is: " << total * ((105 - a) / 100) << "\n";
     cout << "*----------------------------------------------*\n";

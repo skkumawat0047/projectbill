@@ -10,7 +10,7 @@ class Product
 {
 public:
     int id;
-    string name, ID;
+    string name;
     float price;
     void avi_input();
     void avi_display();
@@ -44,7 +44,7 @@ int P_id()
     }
     catch (const exception &e)
     {
-        cout << " " << e.what() << '\n';
+        cout << "error found!" << e.what() << '\n';
     }
     cin.ignore();
     return id;
@@ -86,6 +86,52 @@ bool namevalid(const string &name)
     }
     return true;
 }
+float P_qunt( string field)
+{
+    string input;
+    float value;
+    while (true)
+    {
+        int i = 0, j;
+        j = 0;
+        cout << "Enter "<<field;
+        cin >>input;
+        for (char c : input)
+        {
+            if (c == '.')
+            {
+                j = j + 1;
+            }
+            else if (!isdigit(c))
+            {
+                i = 1;
+                break;
+            }
+        }
+        if (j > 1 || i == 1 || input.empty())
+        {
+            cout << "invlid input, plz enter again !\n";
+            continue;
+        }
+        try
+        {
+            value = stof(input);
+            if (value <= 0)
+            {
+                cout << "quantity must be greater then 0! \n";
+                continue;
+            }
+        }
+        catch (const exception &e)
+        {
+            cout << "conversion error!" << e.what() << '\n';
+            continue;
+        }
+        break;
+    }
+    cin.ignore(1000, '\n');
+    return value;
+}
 void Product::avi_input()
 {
     id = uniqueid();
@@ -98,21 +144,9 @@ void Product::avi_input()
         cout << "Invalid name. No digits/special characters allowed.\n";
     }
 
-    while (true)
-    {
-        cout << "enter price: ";
-        cin >> price;
-        if (cin.fail() || price <= 0)
-        {
-            cout << "invelid input, plz enter in degits! " << endl;
-            cin.clear();
-            cin.ignore(10000, '\n');
-        }
-        else
-            break;
-    }
+    price=P_qunt("price(in Rs.)");
     ofstream fout("product.txt", ios::app);
-    fout << id << "    " << name << "    " << price << endl;
+    fout<<left <<setw(5)<< id<<setw(15)<< name << setw(10) << price << endl;
     fout.close();
     cout << "product added successfully! " << endl;
 }
@@ -130,7 +164,7 @@ void Product::product_delet()
             found = true;
             continue;
         }
-        fout << p.id << "    " << p.name << "    " << p.price << endl;
+        fout <<left<<setw(5)<< p.id <<setw(15) << p.name << setw(10) << p.price << endl;
     }
     fin.close();
     fout.close();
@@ -153,7 +187,7 @@ void Product::viewProducts()
     }
 
     Product p;
-    cout << "ID" << setw(10) << "Name"
+    cout <<left<<setw(5)<< "ID" << setw(15) << "Name"
          << setw(10) << "Price\n";
     cout << "--------------------------------------------------\n";
     string s2;
@@ -221,55 +255,8 @@ void customer ::cust_input1()
             break;
     }
     ofstream fout("allcustomer.txt", ios::app);
-    fout << "    name: " << name << "     Mob:" << number << "     ";
+    fout<<left << setw(15) << name << setw(15) << number;
     fout.close();
-}
-float P_qunt()
-{
-    string Qunt;
-    float quant;
-    while (true)
-    {
-        int i = 0, j;
-        j = 0;
-        cout << "Enter Product quantity(in KG.): ";
-        cin >> Qunt;
-        for (char c : Qunt)
-        {
-
-            if (c == '.')
-            {
-                j = j + 1;
-            }
-            else if (!isdigit(c))
-            {
-                i = 1;
-                break;
-            }
-        }
-        if (j > 1 || i == 1 || Qunt.empty())
-        {
-            cout << "invlid input, plz enter again !\n";
-            continue;
-        }
-        try
-        {
-            quant = stof(Qunt);
-            if (quant <= 0)
-            {
-                cout << "quantity must be greater then 0! \n";
-                continue;
-            }
-        }
-        catch (const exception &e)
-        {
-            cout << "conversion error!" << e.what() << '\n';
-            continue;
-        }
-        break;
-    }
-    cin.ignore(100, '\n');
-    return quant;
 }
 void customer::cust_input2()
 {
@@ -287,11 +274,11 @@ void customer::cust_input2()
         {
             total1 = 0;
             found = true;
-            c_quantity = P_qunt();
-            cust << c_id << "    " << p.price << "    " << c_quantity << setprecision(3) << "    " << p.name << "    ";
+            c_quantity = P_qunt("quantity (in KG.):");
+            cust <<left<<setw(5)<<c_id <<setw(10) << p.price << setw(10)<<fixed<< setprecision(3)<< c_quantity << "    " << p.name << "    ";
             total1 = p.price * c_quantity;
             cust << total1 << endl;
-            fout << "    P.id & qunt: " << c_id << "," << c_quantity;
+            fout <<left<<"    P.id & qunt: "<<setw(12) << c_id << "," << c_quantity;
             total = total + total1;
             break;
         }
@@ -385,8 +372,6 @@ class Invoice
 
 public:
     void createInvoice();
-    // void customerproducts();
-    // void saveInvoice();
     void printInvoice();
 };
 
@@ -438,6 +423,7 @@ void productmenu()
         cout << "2. for delet any product using Productid" << endl;
         cout << "3. for display products available on the store" << endl;
         cout << "4. exit back..." << endl;
+        cout<<"Enter a choice: ";
         cin >> choice;
         switch (choice)
         {
@@ -463,10 +449,10 @@ int main()
     int choice;
     do
     {
-        cout << "enter a choice: " << endl;
         cout << "1. for product management." << endl;
         cout << "2. for printInvoice." << endl;
         cout << "3. for Exit. " << endl;
+        cout << "Enter a choice: " ;
         cin >> choice;
         switch (choice)
         {

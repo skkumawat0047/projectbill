@@ -1,1 +1,2 @@
-Bill.no: 1245
+Bill.no: 1112    name: sanjay     Mob:1235469875         P.id & qunt: 11,20      dis: 0%    tax: 5%     total:900
+Bill.no: 1113    name: roshan     Mob:1236547896         P.id & qunt: 12,12.2    P.id & qunt: 14,13.3   dis: 0%    tax: 5%     total:744.9

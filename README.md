@@ -94,13 +94,13 @@ your final amount is: 1048.59
 
 </pre>
 ##  ⚙️ Technologies Used
--> Standard Template Library (iostream, fstream, string, cctype, ctime)
--> C++ (Object-Oriented Programming)
--> File Handling (txt files)
+- -> Standard Template Library (iostream, fstream, string, cctype, ctime)
+- -> C++ (Object-Oriented Programming)
+- -> File Handling (txt files)
 
 ## 🧑🏻‍🤝‍🧑🏽 Team
- **Organised by**: SPARKS(beginner)
- **Team Name**- The Debugers
- **Team leader**- Sanjay Kumar Kumawat
- **Team Members**- Sanjay kumar kumawat, Vishal Sharma
+- **Organised by**: SPARKS(beginner)
+- **Team Name**- The Debugers
+- **Team leader**- Sanjay Kumar Kumawat
+- **Team Members**- Sanjay kumar kumawat, Vishal Sharma
  

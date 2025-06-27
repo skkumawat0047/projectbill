@@ -1,4 +1,4 @@
-#### 🛒  Grocery Billing System in C++
+# 🛒 Grocery Billing System in C++
 
 This is a simple C++ Console Application for managing a Grocery Shop's billing system. The system handles Product Management, Customer Billing, and Invoice Generation with input validation and file storage.
 
@@ -38,33 +38,33 @@ This is a simple C++ Console Application for managing a Grocery Shop's billing s
 - **Mobile Number**: Must be 10 digits
 
 
-### ▶️ How to Run
+## ▶️ How to Run
 
-## 👨‍💻 Using VsCode--
+### 👨‍💻 Using VsCode--
 -- open the vscode and run the compiled file.
 
 
 ## 📋 MENU Options
 
-#  main menu
+###  main menu
  1. for product management.
  2. for printInvoice.
  3. for Exit.
 
-  #  product management menu
+  #### product management menu
   1. for add product
   2. for update any product using Product id
   2. for delet any product using Product id
   3. for display products available on the store
   4. exit back...
 
-  # printInvoice
+  #### printInvoice
   1. Enter invoice number
   2. Enter your name
   3. Enter mobile numebr
   4. Enter product id and quantity which product he buy
   5. Enter discount
-  -> then Invoice will be autometic generate
+  - -> then Invoice will be autometic generate
 
 
 ## 📃 Sample Invoice output:
@@ -99,8 +99,8 @@ your final amount is: 1048.59
 - -> File Handling (txt files)
 
 ## 🧑🏻‍🤝‍🧑🏽 Team
-- **Organised by**: SPARKS(beginner)
-- **Team Name**- The Debugers
+- **Organised by**: **SPARKS(beginner)**
+- **Team Name**- **The Debuggers**
 - **Team leader**- Sanjay Kumar Kumawat
 - **Team Members**- Sanjay kumar kumawat, Vishal Sharma
  

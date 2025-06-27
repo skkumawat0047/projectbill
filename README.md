@@ -68,6 +68,7 @@ This is a simple C++ Console Application for managing a Grocery Shop's billing s
 
 
 ## 📃 Sample Invoice output:
+<p>
 ------------------   Welcome   -----------------
          ** Radhe-Radhe Grocery shop **
 
@@ -91,7 +92,7 @@ tax amount is: 51.40
 your final amount is: 1048.59
 *----------------------------------------------*
 
-
+</p>
 ##  ⚙️ Technologies Used
 -> Standard Template Library (iostream, fstream, string, cctype, ctime)
 -> C++ (Object-Oriented Programming)

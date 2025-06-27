@@ -1,92 +1,105 @@
-This project is based on Billing systum in a Grocary shop. 
-This project will help to maintain products available on Grocery shop.
-for run this project:
-first:
-there will be three choice:
-1. for product management-> This section is related to products available on the store , add another products availble on the store, delet products and we can update productsby using this section.
-2. for print invoice-> This section is related to create bill and save the detials of customer and print bill.
-3. for exiting-> When we chose 3 , we will exit.
+#### 🛒  Grocery Billing System in C++
+
+This is a simple C++ Console Application for managing a Grocery Shop's billing system. The system handles Product Management, Customer Billing, and Invoice Generation with input validation and file storage.
 
 
-Inputs  /  Outpus: 
-1. for product management.
-2. for printInvoice.
-3. for Exit.
+## 🔧 Features
 
-   ->1
-1. for add product 
-2. for update any product by productid.
-3. for delet any product using Productid
-4. for display products available on the store
-5. exit back...
+### ✅ Product Management
+- Add new products with ID, name, and price
+- Update products by ID
+- Delete products by ID
+- View all available products
 
-  ->1
-Enter Product ID: 11
-enter name: apple
-enter price: 45.56
-product added successfully! 
- 1. for add product
- 2. for update any product by productid.
- 3. for delet any product using Productid
- 4. for display products available on the store
- 5. exit back...
+### 👲 Custome's detials
+- Add customer name and mobile number
+- Add products using Product ID to the bill with quantity
+- Add discount(in %)
+- Calculate total amount for customer purchase
 
-   ->1
-Enter Product ID: 12
-enter name: mango
-enter price: 40
-product added successfully!
+### 🧾 Invoice Generation
+- Generate invoice with a unique invoice number
+- Display purchased items, quantity, price, and total
+- Save invoice details to a file
 
-1. for add product
-2. for update any product by productid.
-3. for delet any product using Productid
-4. for display products available on the store
-5. exit back...
-  ->4
-   ID      Name     Price     
--------------------------------
-   11     apple     45.56     
-   12     mango       40      
+### 🗃️ File Structure
 
-   ->2
-Enter Product ID: 13
-enter name: mango
-enter price: 50
-product added successfully! 
-1. for add product
-2. for update any product by productid.
-3. for delet any product using Productid
-4. for display products available on the store
-5. exit back...
+- "product.txt" – Stores all available products
+- "customer.txt" – Stores temporary customer cart details
+- "allcustomer.txt" – Stores all customers invoice records
+- "main.cpp" – Main source code
 
-   ->3
-Enter Product ID: 11
-Product deleted!
 
-1. for add product
-2. for update any product by productid.
-3. for delet any product using Productid
-4. for display products available on the store
-5. exit back...
-  ->4
-   ID      Name     Price      
---------------------------------
-   13     mango       50       
-   
-1. for add product
-2. for update any product by productid.
-3. for delet any product using Productid
-4. for display products available on the store
-5. exit back...
- -> 5
-   
+## 🧪 Input Validations
 
-1. for product management.
-2. for printInvoice.
-3. for Exit.
- -> 2
-enter invoice number: 4512
-enter name: sanjay
-enter mob_number: 5632414552  
-Enter Product ID: 12
+- **Product ID**: Must be a positive integer
+- **Product Name / Customer Name**: Must contain only alphabets and spaces
+- **Price / Quantity**: Must be positive float
+- **Mobile Number**: Must be 10 digits
 
+
+### ▶️ How to Run
+
+## 👨‍💻 Using VsCode--
+-- open the vscode and run the compiled file.
+
+
+## 📋 MENU Options
+
+#  main menu
+ 1. for product management.
+ 2. for printInvoice.
+ 3. for Exit.
+
+  #  product management menu
+  1. for add product
+  2. for update any product using Product id
+  2. for delet any product using Product id
+  3. for display products available on the store
+  4. exit back...
+
+  # printInvoice
+  1. Enter invoice number
+  2. Enter your name
+  3. Enter mobile numebr
+  4. Enter product id and quantity which product he buy
+  5. Enter discount
+  -> then Invoice will be autometic generate
+
+
+## 📃 Sample Invoice output:
+------------------   Welcome   -----------------
+         ** Radhe-Radhe Grocery shop **
+
+/--------------------Invoice--------------------/
+invoice number: 112      T&D: Fri Jun 27 09:23:01 2025
+
+name: sanjay        mob_number: 1245789636
+
+--------------------***-------------------------
+id    price      qt.         name      total
+------------------------------------------------
+11   45        5.13          apple     230.85
+13   45.9      2.35          papaya    107.865
+12   45.26     15.23         banana    689.31
+------------------------------------------------
+yours total amount is: 1028.02
+discount: 3%
+tax: 5%
+tax amount is: 51.40
+------------------------------------------------
+your final amount is: 1048.59
+*----------------------------------------------*
+
+
+##  ⚙️ Technologies Used
+-> Standard Template Library (iostream, fstream, string, cctype, ctime)
+-> C++ (Object-Oriented Programming)
+-> File Handling (txt files)
+
+## 🧑🏻‍🤝‍🧑🏽 Team
+ **Organised by**: SPARKS(beginner)
+ **Team Name**- The Debugers
+ **Team leader**- Sanjay Kumar Kumawat
+ **Team Members**- Sanjay kumar kumawat, Vishal Sharma
+ 

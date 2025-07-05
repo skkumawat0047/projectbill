@@ -1,4 +1,4 @@
-# 🛒 Grocery Billing System in C++
+# 🛒 Grocery Billing System By team **The Debuggers**
 
 This is a simple C++ Console Application for managing a Grocery Shop's billing system. The system handles Product Management, Customer Billing, and Invoice Generation with input validation and file storage.
 
@@ -98,9 +98,9 @@ your final amount is: 1048.59
 - -> C++ (Object-Oriented Programming)
 - -> File Handling (txt files)
 
-## 🧑🏻‍🤝‍🧑🏽 Team
+## 🧑🏻‍🤝‍🧑🏽 About Team:
 - **Organised by**: **SPARKS(beginner)**
 - **Team Name**- **The Debuggers**
-- **Team leader**- Sanjay Kumar Kumawat
-- **Team Members**- Sanjay kumar kumawat, Vishal Sharma
+- **Team Member**- Sanjay Kumar Kumawat  <a target="_blank" href="https://www.linkedin.com/in/sanjay-kumawat-461b23358/"> Linkden </a>
+  <a target="_blank" href="https://github.com/skkumawat0047">Github</a>
  

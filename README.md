@@ -101,8 +101,5 @@ your final amount is: 1048.59
 ## 🧑🏻‍🤝‍🧑🏽 About Team:
 - **Organised by**: **SPARKS(beginner)**
 - **Team Name**- **The Debuggers**
-- **Team Member**- *Sanjay Kumar Kumawat*
- <br>
- you can see my profile on  <a target="_blank" href="https://www.linkedin.com/in/sanjay-kumawat-461b23358/"> Linkden </a> <br>
- <a target="_blank" href="https://github.com/skkumawat0047">Github</a>
+- **Team Member**- *Sanjay Kumar Kumawat* you can see my profile on  <a target="_blank" href="https://www.linkedin.com/in/sanjay-kumawat-461b23358/"> Linkden </a> 
  

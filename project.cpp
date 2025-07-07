@@ -6,6 +6,7 @@
 #include <limits>
 #include <ctime>
 using namespace std;
+// this is product class by which we store all the products avilabe on the store
 class Product
 {
 public:
@@ -130,7 +131,7 @@ float P_qunt(string field)
     cin.ignore(1000, '\n');
     return value;
 }
-void Product::avi_input()
+void Product::avi_input() //this will add product using their Id and name with price
 {
     id = uniqueid();
     while (true)
@@ -147,7 +148,7 @@ void Product::avi_input()
     fout.close();
     cout << "product added successfully! " << endl;
 }
-void Product::product_update()
+void Product::product_update()  // by this function we can update any product using product id
 {
     Product p;
     string u_id = P_id("id ");
@@ -189,7 +190,7 @@ void Product::product_update()
     else
         cout << "product not found" << endl;
 }
-void Product::product_delet()
+void Product::product_delet()  // by this function we can delet any product using product id
 {
     Product p;
     string p_id = P_id("id");
@@ -221,7 +222,7 @@ void Product::product_delet()
     else
         cout << "product not found! " << endl;
 }
-void Product::viewProducts()
+void Product::viewProducts()  // by this function we can see all products availabe on the store
 {
     ifstream fin("product.txt", ios::in | ios::app);
     if (!fin)
@@ -244,6 +245,7 @@ void Product::viewProducts()
     cout << "\n------------------------------------------------\n";
     cout << "\n";
 }
+// this customer class sotre the data about the customer
 class customer
 {
     string name, number;
@@ -274,7 +276,7 @@ int digit_mob(const string &number)
     else
         return 11;
 }
-void customer ::cust_input1()
+void customer ::cust_input1() // this function store the name and mobilenumber
 {
     customer c;
     while (true)
@@ -302,7 +304,7 @@ void customer ::cust_input1()
     fout << left << setw(15) << name << setw(15) << number;
     fout.close();
 }
-void customer::cust_input2()
+void customer::cust_input2()   // this function store the data using product Id which product customer buy
 {
     Product p;
     c_id = P_id("id");
@@ -388,7 +390,7 @@ float customer::cust_input3()
     }
     return discount;
 }
-void customer::cust_display()
+void customer::cust_display()  // this function display the bill 
 {
     float a = discount;
     cout << "name: " << name << setw(20) << "mob_number: " << number << endl;
@@ -425,7 +427,7 @@ public:
     void printInvoice();
 };
 
-void Invoice::createInvoice()
+void Invoice::createInvoice() // this function provide an unique Invoice id
 {
     customer c;
     Invoice i;

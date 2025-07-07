@@ -9,7 +9,6 @@ using namespace std;
 class Product
 {
 public:
-    // int id;
     string id, name;
     float price;
     void avi_input();
@@ -328,7 +327,7 @@ void customer::cust_input2()
             total1 = p.price * c_quantity;
             cust << total1 << endl;
             total = total + total1;
-            fout << left << "    P.id & qunt: " << setw(12) << c_id << "," << c_quantity;
+            fout << left << "    P.id & qunt: " << c_id << "," << setw(10) << c_quantity;
             break;
         }
     }
@@ -430,10 +429,29 @@ void Invoice::createInvoice()
 {
     customer c;
     Invoice i;
+    bool found = false;
+    string I_no;
     invoice_number = P_id("invoice number");
-    ofstream fout("allcustomer.txt", ios::app);
-    fout << "I.No.:" << left << setw(10) << invoice_number;
-    fout.close();
+    ifstream fin("allcustomer.txt", ios::in);
+    string line;
+    while (getline(fin, line))
+    {
+        if (line.find("I.No.:" + invoice_number) != string::npos)
+        {
+            found = true;
+            cout << "This invoice number already exists. Please enter another.\n";
+            break;
+        }
+    }
+    fin.close();
+    if (found)
+        createInvoice();
+    else
+    {
+        ofstream fout("allcustomer.txt", ios::app);
+        fout << "I.No.:" << left << setw(10) << invoice_number;
+        fout.close();
+    }
 }
 
 void Invoice::printInvoice()

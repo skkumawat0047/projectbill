@@ -54,7 +54,7 @@ This is a simple C++ Console Application for managing a Grocery Shop's billing s
   #### product management menu
   1. for add product
   2. for update any product using Product id
-  2. for delet any product using Product id
+  2. for delete any product using Product id
   3. for display products available on the store
   4. exit back...
 

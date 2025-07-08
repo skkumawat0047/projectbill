@@ -281,7 +281,7 @@ void customer ::cust_input1() // this function store the name and mobilenumber
     customer c;
     while (true)
     {
-        cout << "enter name: ";
+        cout << "enter customer name: ";
         getline(cin, name);
         if (namevalid(name))
             break;
